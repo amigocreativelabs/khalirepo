@@ -89,6 +89,15 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // Contact form
+  // To avoid being asked to activate the form repeatedly via Gmail, FormSubmit provides a unique,
+  // randomized key (alias token) for one-time permanent activation.
+  // How to get and use your key:
+  // 1. Submit this form once on your website with your email.
+  // 2. Click the activation link sent to your email (amigocreativelabs@gmail.com).
+  // 3. On the confirmation page, copy the random string key (or copy it from your formsubmit.co settings page).
+  // 4. Replace "amigocreativelabs@gmail.com" below with that random string key (e.g. "c277d8d5f1ett209149848e390b9b5cc").
+  const FORMSUBMIT_KEY = "amigocreativelabs@gmail.com"; 
+
   const form = document.getElementById('contactForm');
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -101,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    fetch("https://formsubmit.co/ajax/amigocreativelabs@gmail.com", {
+    fetch(`https://formsubmit.co/ajax/${FORMSUBMIT_KEY}`, {
       method: "POST",
       headers: { 
         'Content-Type': 'application/json',
